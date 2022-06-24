@@ -23,12 +23,14 @@ async function run() {
 
       // POST API
       app.post('/users', async(req, res) => {
-        console.log('hitting the post', req.body);
-        res.send('hit the post');
+        const newUser = req.body;
+        const result = await usersCollection.insertOne(newUser);
+        console.log(`Got new user: `, req.body);
+        console.log('added user', result);
+        res.json(result);
       })
-      
     } finally {
-      await client.close();
+      // await client.close();
     }
   }
   run().catch(console.dir);
