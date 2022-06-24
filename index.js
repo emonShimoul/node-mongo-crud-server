@@ -21,6 +21,13 @@ async function run() {
       const database = client.db("foodMaster");
       const usersCollection = database.collection("users");
 
+      // GET API
+      app.get('/users', async(req, res) => {
+        const cursor = usersCollection.find({}); 
+        const users = await cursor.toArray();
+        res.send(users);
+      })
+
       // POST API
       app.post('/users', async(req, res) => {
         const newUser = req.body;
