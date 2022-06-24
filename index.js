@@ -15,13 +15,12 @@ async function run() {
       await client.connect();
       const database = client.db("foodMaster");
       const usersCollection = database.collection("users");
-      // create a document to insert
-      const doc = {
-        name: "SpecialOne",
-        email: "specialone@gmail.com",
-      }
-      const result = await usersCollection.insertOne(doc);
-      console.log(`A document was inserted with the _id: ${result.insertedId}`);
+
+      // POST API
+      app.post('/users', async(req, res) => {
+        console.log('hitting the post', req.body);
+        res.send('hit the post');
+      })
     } finally {
       await client.close();
     }
