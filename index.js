@@ -21,6 +21,7 @@ async function run() {
         console.log('hitting the post', req.body);
         res.send('hit the post');
       })
+      
     } finally {
       await client.close();
     }
